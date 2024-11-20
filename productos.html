@@ -6,23 +6,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PC Titles</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
-    <h1>Lista de PCs</h1>
-    <pc-viewer></pc-viewer>
-
-    <!-- Template para los títulos -->
-    <template id="pc-template">
-        <div class="pc-item">
-            <img class="image" src="" alt="PC" />
-            <h2 class="title"></h2>
-            <p class="price"><span>€</span></p>
+    <header class="p-10 w-full text-white bg-cover bg-center relative"
+        style="background-image: url('./assets/images/computer-electronic-components-bg.jpg');">
+        <!-- Logo -->
+        <div class="absolute inset-0 bg-black bg-opacity-75 flex justify-between items-center w-full text-white bg-black bg-opacity-75 px-4">
+            <img src="./assets/images/computer-pc-icon-logo.jpg" alt="Logo" class="h-10">
+            <h1 class="text-xl font-bold">Tienda Online</h1>
+            <!-- Ícono del carrito -->
+            <button class="relative">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5m0 0L3 3m4 10v6a1 1 0 001 1h10a1 1 0 001-1v-6M9 17h6" />
+                </svg>
+                <!-- Badge del carrito -->
+                <span
+                    class="cart-badge absolute top-0 right-0 bg-red-500 text-xs text-white rounded-full w-5 h-5 flex items-center justify-center">0</span>
+            </button>
         </div>
-    </template>
+    </header>
+    <main>
+        <h1>Lista de PCs</h1>
+        <pc-viewer></pc-viewer>
 
-    <script src="./script.js">
-    </script>
+        <!-- Template para los títulos -->
+        <template id="pc-template">
+            <div class="pc-item relative">
+                <!-- Botón de información -->
+                <button class="info-btn absolute top-2 right-2 rounded-full w-8 h-8 flex items-center justify-center"
+                        data-popover-anchor>
+                        <svg class="icon-info-btn h-5 w-5 py-1 fill-white hover:fill-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path d="M48 80a48 48 0 1 1 96 0A48 48 0 1 1 48 80zM0 224c0-17.7 14.3-32 32-32l64 0c17.7 0 32 14.3 32 32l0 224 32 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 512c-17.7 0-32-14.3-32-32s14.3-32 32-32l32 0 0-192-32 0c-17.7 0-32-14.3-32-32z"/></svg>
+                </button>
+            
+                <!-- Popover -->
+                <div id="popover-{{id}}" class="popover hidden absolute top-12 right-2 w-60 bg-white text-black p-4 shadow-lg rounded-md z-20">
+                  <p class="short-description font-large mb-2"></p>
+                  <ul class="tags list-disc list-inside text-sm text-gray-600"></ul>
+                </div>
+
+                <img class="image" src="" alt="PC" />
+                <h2 class="title"></h2>
+                <p class="price"><span>€</span></p>
+              </div>
+        </template>
+    </main>
 </body>
+<script src="./script.js">
+</script>
 
 </html>

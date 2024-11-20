@@ -4,13 +4,6 @@
     box-sizing: border-box;
 }
 
-/* <template id="pc-template">
-        <div class="pc-item">
-            <img class="image" src="" alt="PC" />
-            <h2 class="title"></h2>
-            <p class="price"><span>€</span></p>
-        </div>
-    </template> */
 pc-viewer {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -47,6 +40,34 @@ pc-viewer {
 .image {
     width: 75%;
     height: auto;
+}
+
+.info-btn{
+    background-color: #535376;
+}
+.icon-info-btn{
+    color: white;
+}
+.popover{
+    display: none;
+    position: absolute;
+    background-color: white;
+    color: black;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.popover.active {
+    display: block;
+    p{
+        font-size: .875rem;
+        font-weight: 600;
+        padding: 0 1rem;
+    }
+    ul{
+        list-style: none;
+    }
 }
 
 /* Responsivo */
