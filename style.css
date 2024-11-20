@@ -1,0 +1,13 @@
+/* Responsivo */
+
+@media (min-width: 768px) {
+    .banner-desc {
+        font-size: 1.25rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .banner-desc {
+        font-size: 1.5rem;
+    }
+}

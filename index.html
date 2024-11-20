@@ -1,11 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proyecto: Tienda Online de Componentes Para PCs</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body>
-    
+    <main>
+        <section class="bg-cover bg-center h-screen relative"
+            style="background-image: url('./assets/images/computer-electronic-components-bg.jpg');">
+            <header class="flex justify-between items-center p-4 fixed w-full text-white z-10">
+                <!-- Logo -->
+                <img src="./assets/images/computer-pc-icon-logo.jpg" alt="Logo" class="h-10">
+                <h1 class="text-xl font-bold">Tienda Online</h1>
+                <!-- Ícono del carrito -->
+                <button class="relative">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5m0 0L3 3m4 10v6a1 1 0 001 1h10a1 1 0 001-1v-6M9 17h6" />
+                    </svg>
+                    <!-- Badge del carrito -->
+                    <span
+                        class="absolute top-0 right-0 bg-red-500 text-xs text-white rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                </button>
+            </header>
+
+            <!-- Capa de contenido dentro del banner -->
+            <div class="absolute inset-0 bg-black bg-opacity-75 flex flex-col justify-center items-center px-6">
+                <h2 class="text-white text-2xl sm:text-4xl lg:text-5xl font-bold text-center">
+                    ¡Bienvenido a la mejor tienda de tecnología!
+                </h2>
+                <p class="banner-desc text-white text-center mt-2 px-3">
+                    Componentes de PC diseñados para gamers y profesionales
+                </p>
+                <button class="mt-4 px-6 py-3 bg-blue-600 text-white font-medium text-lg rounded-md shadow-md hover:bg-blue-700 hover:shadow-lg transition-all duration-200">
+                    Ver productos
+                </button>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
