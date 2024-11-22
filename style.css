@@ -27,7 +27,7 @@ pc-viewer {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.title{
+.title {
     margin-top: .5rem;
 }
 
@@ -42,13 +42,15 @@ pc-viewer {
     height: auto;
 }
 
-.info-btn{
+.info-btn {
     background-color: #535376;
 }
-.icon-info-btn{
+
+.icon-info-btn {
     color: white;
 }
-.popover{
+
+.popover {
     display: none;
     position: absolute;
     background-color: white;
@@ -60,12 +62,14 @@ pc-viewer {
 
 .popover.active {
     display: block;
-    p{
+
+    p {
         font-size: .875rem;
         font-weight: 600;
         padding: 0 1rem;
     }
-    ul{
+
+    ul {
         list-style: none;
     }
 }
@@ -75,11 +79,13 @@ pc-viewer {
     .banner-desc {
         font-size: 1.25rem;
     }
+
     pc-viewer {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 15px;
     }
+
     .pc-item {
         display: flex;
         flex-direction: column;
@@ -87,6 +93,7 @@ pc-viewer {
         align-items: center;
         border-radius: 8px;
     }
+
     .image {
         width: 65%;
         height: auto;

@@ -2,6 +2,9 @@ class PCViewer extends HTMLElement {
   constructor() {
     super();
     this.apiUrl = 'https://products-foniuhqsba-uc.a.run.app/PCs';
+    this.cart = {};
+    this.cartBadge = document.querySelector('.cart-bagde');
+
   }
 
   connectedCallback() {
@@ -30,13 +33,36 @@ class PCViewer extends HTMLElement {
       const popover = pcContent.querySelector('.popover');
       const infoButton = pcContent.querySelector('.info-btn');
 
+      const quantitySpan = pcContent.querySelector('.quantity');
+      const decrementBtn = pcContent.querySelector('.decrement');
+      const incrementBtn = pcContent.querySelector('.increment');
+
       pcContent.querySelector('.image').src = pc.image;
       pcContent.querySelector('.title').innerHTML = pc.title;
       pcContent.querySelector('.price').innerHTML = pc.price;
       popover.id = `popover-${pc.id}`;
       popover.querySelector('.short-description').innerHTML = pc.short_description;
 
-      // Añadir etiquetas
+      // Inicializo cantidad en el carrito
+      this.cart[pc.id] = this.cart[pc.id] || 0;
+
+      // Gestiono el incremento
+      incrementBtn.addEventListener('click', () => {
+        this.cart[pc.id]++;
+        quantitySpan.textContent = this.cart[pc.id];
+        this.updateCartBadge();
+      });
+
+      // Gestiono el decremento
+      decrementBtn.addEventListener('click', () => {
+        if (this.cart[pc.id] > 0) {
+          this.cart[pc.id]--;
+          quantitySpan.textContent = this.cart[pc.id];
+          this.updateCartBadge();
+        }
+      });
+
+      // Añado etiquetas
       const tagsContainer = popover.querySelector('.tags');
       pc.tags.forEach(tag => {
         const li = document.createElement('li');
@@ -60,6 +86,13 @@ class PCViewer extends HTMLElement {
       }
     });
   }
+
+  updateCartBadge() {
+    const totalItems = Object.values(this.cart).reduce((sum, quantity) => sum + quantity, 0);
+    this.cartBadge.textContent = totalItems;
+    localStorage.setItem('cartBadge', totalItems); // Este es un tipo de función para almacenar en el localStorage
+  }
+
 }
 
 customElements.define('pc-viewer', PCViewer);

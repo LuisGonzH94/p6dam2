@@ -44,4 +44,12 @@
         </section>
     </main>
 </body>
+<!-- Aquí podremos acticualizar el carrito -->
+<script> 
+    document.addEventListener('DOMContentLoaded', () => {
+      const cartBadge = document.querySelector('.cart-badge');
+      const savedBadge = localStorage.getItem('cartBadge') || 0;
+      cartBadge.textContent = savedBadge;
+    });
+  </script>
 </html>
