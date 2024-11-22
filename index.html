@@ -18,7 +18,7 @@
                 <img src="./assets/images/computer-pc-icon-logo.jpg" alt="Logo" class="h-10">
                 <h1 class="text-xl font-bold">Tienda Online</h1>
                 <!-- Ícono del carrito -->
-                <button class="relative">
+                <button class="relative cart-button">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -38,18 +38,29 @@
                 <p class="banner-desc text-white text-center mt-2 px-3">
                     Componentes de PC diseñados para gamers y profesionales
                 </p>
-                <button class="banner-btn mt-4 px-6 py-3 bg-blue-600 text-white font-medium text-lg rounded-md shadow-md hover:bg-blue-700 hover:shadow-lg transition-all duration-200"><a href="./productos.html">Ver productos</a>
+                <button
+                    class="banner-btn mt-4 px-6 py-3 bg-blue-600 text-white font-medium text-lg rounded-md shadow-md hover:bg-blue-700 hover:shadow-lg transition-all duration-200"><a
+                        href="./productos.html">Ver productos</a>
                 </button>
             </div>
         </section>
+
+        <div class="cart-popover hidden">
+            <div class="popover-content">
+                <h2>Carrito de Compras</h2>
+                <ul class="cart-items"></ul>
+                <div class="cart-total">
+                    <span>Total:</span> <span class="total-price">0.0</span>
+                </div>
+                <div class="cart-buttons flex gap-4">
+                    <button class="buy-button">Comprar</button>
+                    <button class="cancel-button">Cancelar</button>
+                </div>
+                <button class="close-popover">X</button>
+            </div>
+        </div>
     </main>
 </body>
-<!-- Aquí podremos acticualizar el carrito -->
-<script> 
-    document.addEventListener('DOMContentLoaded', () => {
-      const cartBadge = document.querySelector('.cart-badge');
-      const savedBadge = localStorage.getItem('cartBadge') || 0;
-      cartBadge.textContent = savedBadge;
-    });
-  </script>
+<script src="./script.js"></script>
+
 </html>

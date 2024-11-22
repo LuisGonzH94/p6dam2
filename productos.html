@@ -18,7 +18,7 @@
             <img src="./assets/images/computer-pc-icon-logo.jpg" alt="Logo" class="h-10">
             <h1 class="text-xl font-bold">Tienda Online</h1>
             <!-- Ícono del carrito -->
-            <button class="relative">
+            <button class="relative cart-button">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -51,12 +51,13 @@
                 <div id="popover-{{id}}"
                     class="popover hidden absolute top-12 right-2 w-60 bg-white text-black p-4 shadow-lg rounded-md z-20">
                     <p class="short-description font-large mb-2"></p>
+                    <!-- Creamos elemento 'li' para guardar los componentes de cada PC. -->
                     <ul class="tags list-disc list-inside text-sm text-gray-600"></ul>
                 </div>
 
                 <img class="image" src="" alt="PC" />
                 <h2 class="title"></h2>
-                <p class="price"><span>€</span></p>
+                <p class="price"><span>0.0</span></p>
 
                 <!-- Se agrega o disminuye  -->
                 <div class="quantity-controls flex justify-center items-center gap-2 mt-2 text-base cursor-pointer">
@@ -66,11 +67,28 @@
                     <button
                         class="increment bg-green-500 text-white font-bold w-8 h-8 rounded-full shadow-md hover:bg-green-600">+</button>
                 </div>
+                <button class="add-to-cart bg-blue-500 text-white px-4 py-2 mt-3 rounded hover:bg-blue-600">
+                    Agregar
+                  </button>
             </div>
         </template>
+
+        <div class="cart-popover hidden">
+            <div class="popover-content">
+                <h2>Carrito de Compras</h2>
+                <ul class="cart-items"></ul>
+                <div class="cart-total">
+                    <span>Total:</span> <span class="total-price">0.0</span>
+                </div>
+                <div class="cart-buttons flex gap-4">
+                    <button class="buy-button">Comprar</button>
+                    <button class="cancel-button">Cancelar</button>
+                </div>
+                <button class="close-popover">X</button>
+            </div>
+        </div>
     </main>
 </body>
-<script src="./script.js">
-</script>
+<script src="./script.js"></script>
 
 </html>
