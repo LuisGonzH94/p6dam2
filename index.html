@@ -13,6 +13,7 @@
     <main>
         <section class="bg-cover bg-center h-screen relative"
             style="background-image: url('./assets/images/computer-electronic-components-bg.jpg');">
+
             <header class="flex justify-between items-center p-4 fixed w-full text-white z-10">
                 <!-- Logo -->
                 <img src="./assets/images/computer-pc-icon-logo.jpg" alt="Logo" class="h-10">
@@ -26,7 +27,7 @@
                     </svg>
                     <!-- Badge del carrito -->
                     <span
-                        class="cart-badge absolute top-0 right-0 bg-red-500 text-xs text-white rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                        class="cart-badge absolute -top-2 -right-2 bg-red-500 text-xs text-white rounded-full w-5 h-5 flex justify-center items-center">0</span>
                 </button>
             </header>
 
@@ -38,10 +39,10 @@
                 <p class="banner-desc text-white text-center mt-2 px-3">
                     Componentes de PC diseñados para gamers y profesionales
                 </p>
-                <button
-                    class="banner-btn mt-4 px-6 py-3 bg-blue-600 text-white font-medium text-lg rounded-md shadow-md hover:bg-blue-700 hover:shadow-lg transition-all duration-200"><a
-                        href="./productos.html">Ver productos</a>
-                </button>
+                <a href="productos.html"
+                    class="mt-6 px-6 py-3 bg-blue-600 text-white font-medium text-lg rounded shadow hover:bg-blue-700">
+                    Ver productos
+                </a>
             </div>
         </section>
 
@@ -60,6 +61,10 @@
             </div>
         </div>
     </main>
+    <!-- Footer -->
+    <footer class="p-4 bg-blue-800 text-white text-center">
+        © 2024 Tienda de Tecnología - Todos los derechos reservados
+    </footer>
 </body>
 <script src="./script.js"></script>
 

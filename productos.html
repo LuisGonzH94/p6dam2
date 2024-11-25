@@ -4,90 +4,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PC Titles</title>
+    <title>Tienda Online - Productos</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
-    <header class="p-10 w-full text-white bg-cover bg-center relative"
+    <!-- Header con carrito -->
+    <header
+        class="flex justify-between items-center p-4 fixed w-full bg-blue-800 text-white z-10 bg-cover bg-center background-size: contain; relative"
         style="background-image: url('./assets/images/computer-electronic-components-bg.jpg');">
         <!-- Logo -->
-        <div
-            class="absolute inset-0 bg-black bg-opacity-75 flex justify-between items-center w-full text-white bg-black bg-opacity-75 px-4">
-            <img src="./assets/images/computer-pc-icon-logo.jpg" alt="Logo" class="h-10">
-            <h1 class="text-xl font-bold">Tienda Online</h1>
-            <!-- Ícono del carrito -->
-            <button class="relative cart-button">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5m0 0L3 3m4 10v6a1 1 0 001 1h10a1 1 0 001-1v-6M9 17h6" />
-                </svg>
-                <!-- Badge del carrito -->
-                <span
-                    class="cart-badge absolute top-0 right-0 bg-red-500 text-xs text-white rounded-full w-5 h-5 flex items-center justify-center">0</span>
-            </button>
-        </div>
+        <img src="./assets/images/computer-pc-icon-logo.jpg" alt="Logo" class="h-10">
+        <h1 class="text-xl font-bold">Tienda Online</h1>
+        <!-- Ícono del carrito -->
+        <button id="cart-button" popovertarget="cart-popover" class="relative cart-button">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5m0 0L3 3m4 10v6a1 1 0 001 1h10a1 1 0 001-1v-6M9 17h6" />
+            </svg>
+            <!-- Badge del carrito -->
+            <span id="cart-badge"
+                class="cart-badge absolute -top-2 -right-2 bg-red-500 text-xs text-white rounded-full w-5 h-5 flex justify-center items-center">0</span>
+        </button>
     </header>
-    <main>
-        <h1>Lista de PCs</h1>
-        <pc-viewer></pc-viewer>
 
-        <!-- Template para los títulos -->
-        <template id="pc-template">
-            <div class="pc-item relative">
-                <!-- Botón de información -->
-                <button class="info-btn absolute top-2 right-2 rounded-full w-8 h-8 flex items-center justify-center"
-                    data-popover-anchor>
-                    <svg class="icon-info-btn h-5 w-5 py-1 fill-white hover:fill-black"
-                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512">
-                        <path
-                            d="M48 80a48 48 0 1 1 96 0A48 48 0 1 1 48 80zM0 224c0-17.7 14.3-32 32-32l64 0c17.7 0 32 14.3 32 32l0 224 32 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 512c-17.7 0-32-14.3-32-32s14.3-32 32-32l32 0 0-192-32 0c-17.7 0-32-14.3-32-32z" />
-                    </svg>
-                </button>
-
-                <!-- Popover -->
-                <div id="popover-{{id}}"
-                    class="popover hidden absolute top-12 right-2 w-60 bg-white text-black p-4 shadow-lg rounded-md z-20">
-                    <p class="short-description font-large mb-2"></p>
-                    <!-- Creamos elemento 'li' para guardar los componentes de cada PC. -->
-                    <ul class="tags list-disc list-inside text-sm text-gray-600"></ul>
-                </div>
-
-                <img class="image" src="" alt="PC" />
-                <h2 class="title"></h2>
-                <p class="price"><span>0.0</span></p>
-
-                <!-- Se agrega o disminuye  -->
-                <div class="quantity-controls flex justify-center items-center gap-2 mt-2 text-base cursor-pointer">
-                    <button
-                        class="decrement bg-red-500 text-white font-bold w-8 h-8 rounded-full shadow-md hover:bg-red-600">-</button>
-                    <span class="quantity text-lg font-bold">0</span>
-                    <button
-                        class="increment bg-green-500 text-white font-bold w-8 h-8 rounded-full shadow-md hover:bg-green-600">+</button>
-                </div>
-                <button class="add-to-cart bg-blue-500 text-white px-4 py-2 mt-3 rounded hover:bg-blue-600">
-                    Agregar
-                  </button>
+    <!-- Popover del carrito -->
+    <cart-summary>
+        <div id="cart-popover" popover class="hidden popover-content">
+            <button id="close-cart" class="close-btn">✖</button>
+            <h2 class="text-lg font-bold mb-2">Carrito de Compras</h2>
+            <ul id="cart-items" class="cart-items mb-4"></ul>
+            <div class="cart-summary text-right mb-4">
+                <span class="text-lg font-bold">Total: </span>
+                <span id="cart-total" class="text-green-500 font-bold">€0.00</span>
             </div>
-        </template>
-
-        <div class="cart-popover hidden">
-            <div class="popover-content">
-                <h2>Carrito de Compras</h2>
-                <ul class="cart-items"></ul>
-                <div class="cart-total">
-                    <span>Total:</span> <span class="total-price">0.0</span>
-                </div>
-                <div class="cart-buttons flex gap-4">
-                    <button class="buy-button">Comprar</button>
-                    <button class="cancel-button">Cancelar</button>
-                </div>
-                <button class="close-popover">X</button>
-            </div>
+            <button id="checkout-btn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Hacer
+                Pedido</button>
         </div>
+    </cart-summary>
+    <!-- Contenido principal -->
+    <main class="mt-5">
+        <h1 class="text-2xl font-bold mb-6 text-center">Catálogo de Productos</h1>
+        <pc-viewer class="grid grid-cols-1 md:grid-cols-3 gap-6" id="product-grid"></pc-viewer>
     </main>
+
+    <!-- Footer -->
+    <footer class="p-4 bg-blue-800 text-white text-center">
+        © 2024 Tienda de Tecnología - Todos los derechos reservados
+    </footer>
+
+    <!-- Template para los productos -->
+    <template id="product-template">
+        <div class="product-item bg-white shadow-md rounded-md p-4 align-content-center relative">
+            <img class="image size-auto h-48 object-cover mb-4" src="" alt="PC" />
+            <h2 class="title text-lg font-bold mb-2"></h2>
+            <p class="price text-green-500 font-semibold mb-4"></p>
+            <button class="add-to-cart bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Agregar al
+                Carrito</button>
+        </div>
+    </template>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cartButton = document.querySelector('#cart-button');
+            const cartPopover = document.querySelector('#cart-popover');
+            const closeCartButton = document.querySelector('#close-cart');
+            const body = document.body;
+
+            // Mostrar popover del carrito
+            cartButton.addEventListener('click', () => {
+                cartPopover.classList.remove('hidden');
+                body.classList.add('popover-active');
+            });
+
+            // Cerrar popover del carrito
+            closeCartButton.addEventListener('click', () => {
+                cartPopover.classList.add('hidden');
+                body.classList.remove('popover-active');
+            });
+        });
+    </script>
 </body>
 <script src="./script.js"></script>
 
