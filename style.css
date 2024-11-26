@@ -6,12 +6,17 @@
 body{
     background-color: #535376;
 }
+pc-viewer.flex {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 
 pc-viewer {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
-    padding: 20px;
+    padding: 50px;
     background-color: #535376;
 }
 

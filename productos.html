@@ -33,12 +33,13 @@
     <!-- Popover del carrito -->
     <cart-summary>
         <div id="cart-popover" popover class="hidden popover-content">
-            <button id="close-cart" class="close-btn">✖</button>
+            <button id="close-cart" class="close-btn bg-red-600">✖</button>
             <h2 class="text-lg font-bold mb-2">Carrito de Compras</h2>
-            <ul id="cart-items" class="cart-items mb-4"></ul>
+            <ul id="cart-items" class="cart-items mb-4">
+            </ul>
             <div class="cart-summary text-right mb-4">
                 <span class="text-lg font-bold">Total: </span>
-                <span id="cart-total" class="text-green-500 font-bold">€0.00</span>
+                <span id="cart-total" class=" text-green-500 font-bold">€0.00</span>
             </div>
             <button id="checkout-btn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Hacer
                 Pedido</button>
@@ -47,6 +48,13 @@
     <!-- Contenido principal -->
     <main class="mt-5">
         <h1 class="text-2xl font-bold mb-6 text-center">Catálogo de Productos</h1>
+        <!-- Botón para cambiar la vista -->
+        <div class="flex justify-start mb-4">
+            <button id="toggle-view-button"  class="ms-12 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
+                Cambiar Vista
+            </button>
+        </div>
+
         <pc-viewer class="grid grid-cols-1 md:grid-cols-3 gap-6" id="product-grid"></pc-viewer>
     </main>
 

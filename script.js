@@ -12,8 +12,8 @@ class PCViewer extends HTMLElement {
   }
 
   connectedCallback() {
-    this.loadPCs();
-    this.updateCartBadge();
+    this.loadPCs(); //para aquirir los datos de la API
+    this.updateCartBadge(); //para actualizar el carrito (cantidad de productos agregados)
   }
 
   async loadPCs() {
@@ -31,7 +31,7 @@ class PCViewer extends HTMLElement {
   renderPCs(pcs) {
     const template = document.getElementById('product-template');
     this.innerHTML = '';
-
+    //Para renderizar todas las PCs disponibles en la API incluyendo un listener cuando se agrega una PC.
     pcs.forEach((pc) => {
       const pcContent = document.importNode(template.content, true);
       pcContent.querySelector('.image').src = pc.image;
@@ -52,9 +52,12 @@ class PCViewer extends HTMLElement {
     this.cart[pc.id].quantity++;
     this.saveCartToLocalStorage();
     this.updateCartBadge();
-    this.cartPopover.renderCart(this.cart);
+  
+    // Actualiza el carrito visualmente
+    const cartSummary = document.querySelector('cart-summary');
+    cartSummary.renderCart(this.cart);
   }
-
+  
   updateCartBadge() {
     const totalQuantity = Object.values(this.cart).reduce((acc, item) => acc + item.quantity, 0);
     this.cartBadge.textContent = totalQuantity;
@@ -71,74 +74,72 @@ customElements.define('pc-viewer', PCViewer);
 class CartSummary extends HTMLElement {
   connectedCallback() {
     this.cart = JSON.parse(localStorage.getItem('cart')) || {};
-    this.cartItemsList = this.querySelector('.cart-items');
-    this.totalPrice = this.querySelector('.total-price');
+    this.cartItemsList = this.getElementById('cart-items');
+    this.totalPrice = this.getElementById('cart-total');
     this.renderCart(this.cart);
   }
 
   renderCart(cart) {
-    this.cartItemsList.innerHTML = '';
+    const cartItemsList = this.querySelector('#cart-items');
+    const totalPrice = this.querySelector('#cart-total');
+    cartItemsList.innerHTML = '';
     let total = 0;
-
+  
     Object.values(cart).forEach((item) => {
       if (item.quantity > 0) {
         const li = document.createElement('li');
         li.classList.add('cart-item');
-
+  
         li.innerHTML = `
           <img src="${item.product.image}" alt="${item.product.title}" class="cart-item-image">
           <div>
             <p>${item.product.title}</p>
-            <p>€${item.product.price}</p>
+            <p>€${parseFloat(item.product.price).toFixed(2)}</p>
+            <p>Cantidad: ${item.quantity}</p>
           </div>
         `;
-
-        // li.querySelector('.remove-btn').addEventListener('click', () => {
-        //   this.removeFromCart(item.product.id);
-        // });
-
-        // parseFloat(pc.price).toFixed(2)
-
-        this.cartItemsList.appendChild(li);
-        total += item.product.price * item.quantity;
+  
+        cartItemsList.appendChild(li);
+        total += parseFloat(item.product.price) * item.quantity;
       }
     });
-
-    this.totalPrice.textContent = `€${total.toFixed(2)}`;
-  }
-
-  removeFromCart(productId) {
-    if (this.cart[productId]) {
-      delete this.cart[productId];
-      localStorage.setItem('cart', JSON.stringify(this.cart));
-      this.renderCart(this.cart);
-      document.querySelector('pc-viewer').updateCartBadge();
-    }
-  }
+  
+    totalPrice.textContent = `€${total.toFixed(2)}`;
+  }  
 }
-
 customElements.define('cart-summary', CartSummary);
 
-// Clase ProductDetail
-class ProductDetail extends HTMLElement {
-  async loadDetail(productId) {
-    try {
-      const response = await fetch(`${apiURL}/PCs/${productId}`);
-      if (!response.ok) throw new Error('Error al cargar el producto');
-      const product = await response.json();
-      this.renderDetail(product);
-    } catch (error) {
-      console.error(error);
-    }
-  }
+document.addEventListener('DOMContentLoaded', () => {
+  const cartButton = document.querySelector('#cart-button');
+  const cartPopover = document.querySelector('#cart-popover');
+  const closeCartButton = document.querySelector('#close-cart');
+  const body = document.body;
 
-  renderDetail(product) {
-    this.querySelector('.detail-image').src = product.image;
-    this.querySelector('.detail-title').textContent = product.title;
-    this.querySelector('.detail-description').textContent = product.description;
-    this.querySelector('.detail-price').textContent = `€${product.price}`;
-    this.classList.remove('hidden');
-  }
-}
+  // Mostrar popover del carrito
+  cartButton.addEventListener('click', () => {
+      cartPopover.classList.remove('hidden');
+      body.classList.add('popover-active');
+  });
 
-customElements.define('product-detail', ProductDetail);
+  // Cerrar popover del carrito
+  closeCartButton.addEventListener('click', () => {
+      cartPopover.classList.add('hidden');
+      body.classList.remove('popover-active');
+  });
+
+  // Alternar entre vista Grid y Flex
+  const toggleViewButton = document.querySelector('#toggle-view-button');
+  const pcViewer = document.querySelector('pc-viewer');
+
+  toggleViewButton.addEventListener('click', () => {
+      if (pcViewer.style.display === 'grid' || pcViewer.style.display === '') {
+          pcViewer.style.display = 'flex';
+          pcViewer.style.flexDirection = 'column';
+          toggleViewButton.textContent = 'Cambiar a Vista Grid';
+      } else {
+          pcViewer.style.display = 'grid';
+          pcViewer.style.gridTemplateColumns = 'repeat(auto-fill, minmax(200px, 1fr))';
+          toggleViewButton.textContent = 'Cambiar a Vista Flex';
+      }
+  });
+});

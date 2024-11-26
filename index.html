@@ -19,18 +19,30 @@
                 <img src="./assets/images/computer-pc-icon-logo.jpg" alt="Logo" class="h-10">
                 <h1 class="text-xl font-bold">Tienda Online</h1>
                 <!-- Ícono del carrito -->
-                <button class="relative cart-button">
+                <button id="cart-button" popovertarget="cart-popover" class="relative cart-button">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5m0 0L3 3m4 10v6a1 1 0 001 1h10a1 1 0 001-1v-6M9 17h6" />
                     </svg>
                     <!-- Badge del carrito -->
-                    <span
+                    <span id="cart-badge"
                         class="cart-badge absolute -top-2 -right-2 bg-red-500 text-xs text-white rounded-full w-5 h-5 flex justify-center items-center">0</span>
                 </button>
             </header>
-
+            <cart-summary>
+                <div id="cart-popover" popover class="hidden popover-content">
+                    <button id="close-cart" class="close-btn">✖</button>
+                    <h2 class="text-lg font-bold mb-2">Carrito de Compras</h2>
+                    <ul id="cart-items" class="cart-items mb-4"></ul>
+                    <div class="cart-summary text-right mb-4">
+                        <span class="text-lg font-bold">Total: </span>
+                        <span id="cart-total" class="text-green-500 font-bold">€0.00</span>
+                    </div>
+                    <button id="checkout-btn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Hacer
+                        Pedido</button>
+                </div>
+            </cart-summary>
             <!-- Capa de contenido dentro del banner -->
             <div class="absolute inset-0 bg-black bg-opacity-75 flex flex-col justify-center items-center px-6">
                 <h2 class="text-white text-2xl sm:text-4xl lg:text-5xl font-bold text-center">
@@ -65,6 +77,27 @@
     <footer class="p-4 bg-blue-800 text-white text-center">
         © 2024 Tienda de Tecnología - Todos los derechos reservados
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cartButton = document.querySelector('#cart-button');
+            const cartPopover = document.querySelector('#cart-popover');
+            const closeCartButton = document.querySelector('#close-cart');
+            const body = document.body;
+
+            // Mostrar popover del carrito
+            cartButton.addEventListener('click', () => {
+                cartPopover.classList.remove('hidden');
+                body.classList.add('popover-active');
+            });
+
+            // Cerrar popover del carrito
+            closeCartButton.addEventListener('click', () => {
+                cartPopover.classList.add('hidden');
+                body.classList.remove('popover-active');
+            });
+        });
+    </script>
 </body>
 <script src="./script.js"></script>
 
