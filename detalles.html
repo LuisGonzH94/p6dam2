@@ -17,30 +17,8 @@
 
     <!-- Contenedor principal -->
     <main class="flex justify-center items-center min-h-screen">
-        <div id="product-details" class="max-w-md w-full bg-gray-800 shadow-md rounded-lg overflow-hidden">
-            <div class="p-4">
-                <!-- Imagen del producto -->
-                <img id="product-image" src="" alt="Producto" class="w-full object-cover rounded-md mb-4">
-                <!-- Título del producto -->
-                <h2 id="product-title" class="text-2xl font-bold mb-2"></h2>
-                <!-- Precio del producto -->
-                <p id="product-price" class="text-green-500 text-xl font-semibold mb-2"></p>
-                <!-- Descripción del producto -->
-                <p id="product-description" class="text-gray-300 mb-4"></p>
-                <!-- Tags -->
-                <div id="product-tags" class="flex flex-wrap gap-2 mb-4"></div>
-                <!-- Características -->
-                <div>
-                    <h3 class="text-lg font-bold mb-2">Características:</h3>
-                    <ul id="product-features" class="list-disc list-inside text-gray-300"></ul>
-                </div>
-                <!-- Botón para agregar al carrito -->
-                <button id="add-to-cart" class="add-to-cart bg-blue-500 text-white px-4 py-2 rounded mt-4 w-full hover:bg-blue-600">
-                    Agregar al Carrito
-                </button>
-            </div>
-        </div>
+        <pc-viewer class="grid-none flex justify-center items-center"></pc-viewer>
     </main>
-    
 </body>
+<script src="./script.js"></script>
 </html>
